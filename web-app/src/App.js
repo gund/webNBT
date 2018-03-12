@@ -106,6 +106,7 @@ var App = (function() {
       
       return true;
     } catch(e) {
+      alert(e);
       return false;
     }
   }

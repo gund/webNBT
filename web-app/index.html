@@ -42,12 +42,15 @@
     <script type="text/javascript" src="NBT.js"></script>
   </head>
   <body>
+    <label>
     <div id="drop_zone">
       <span>Drop file here</span>
       <div id="contact" style="font-size:12px;position:fixed;bottom:10px;right:20px;opacity:0.8;">
         Feedback? <a href="http://irath96.github.io/contact/">Contact me</a>
       </div>
     </div>
+    <input type="file" id="file-input">
+    </label>
     <script>
       
       function handleFileSelect(evt) {
@@ -79,11 +82,21 @@
         evt.dataTransfer.dropEffect = 'copy'; // Explicitly show this is a copy.
       }
       
+      function handleInput(e) {
+      	try {
+      	  e.dataTransfer = {};
+      	  e.dataTransfer.files = e.target.files;
+      	  handleFileSelect(e);
+      	} catch (e) {
+      	  alert(e);
+      	}
+      }
+      
       // Setup the dnd listeners.
       var dropZone = document.getElementById('drop_zone');
       dropZone.addEventListener('dragover', handleDragOver, false);
       dropZone.addEventListener('drop', handleFileSelect, false);
-      
+      document.getElementById('file-input').addEventListener('change', handleInput, false);
     </script>
     <div id="topbar">
       <div id="buttons">
